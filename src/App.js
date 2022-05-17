@@ -1,13 +1,15 @@
 import React from "react";
-import { Router, Routes, Route } from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import AddPlaylist from "./pages/AddPlaylist";
 import Home from "./pages/Home";
 
 export default function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/new-playlist" element={<AddPlaylist />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   );
 }
