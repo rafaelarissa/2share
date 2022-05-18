@@ -1,4 +1,4 @@
-import { TextField, Typography } from "@mui/material";
+import { Button, TextField, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { Container, Input, TitleScreen } from "./style";
@@ -30,6 +30,26 @@ export default function AddPlaylist() {
         <Input placeholder="Título da Playlist" />
         <Input placeholder="Ícone" />
         <Input className="descricao" placeholder="Descrição" />
+        <Button
+          sx={{
+            width: "100px",
+            borderRadius: "10px",
+            color: "#121212",
+            backgroundColor: "#ffffff",
+            borderColor: "Helvetica",
+            fontWeight: "bold",
+            fontSize: 10,
+            "&:hover": {
+              backgroundColor: "#fff",
+              color: "#121212",
+              transform: "scale(1.1)",
+            },
+          }}
+          variant="contained"
+          type="submit"
+        >
+          Enviar
+        </Button>
       </Box>
     </Container>
   );
