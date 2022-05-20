@@ -5,6 +5,7 @@ import dotenv from "dotenv";
 import Listbox from "../../components/ListBox";
 import Detail from "../../components/Detail";
 import Dropdown from "../../components/Dropdown";
+import MiniDrawer from "../../components/SideBar";
 dotenv.config();
 
 export default function Home() {
@@ -112,6 +113,7 @@ export default function Home() {
 
   return (
     <Container>
+      <MiniDrawer />
       <form onSubmit={buttonClicked}>
         <Dropdown
           label="Genre :"
