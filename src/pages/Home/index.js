@@ -42,7 +42,7 @@ export default function Home() {
       setToken(tokenResponse.data.access_token);
       console.log(tokenResponse.data.access_token);
 
-      axios("https://api.spotify.com/v1/browse/categories?locale=sv_US", {
+      axios("https://api.spotify.com/v1/browse/categories?locale=sv_BR", {
         method: "GET",
         headers: { Authorization: "Bearer " + tokenResponse.data.access_token },
       }).then((genreResponse) => {

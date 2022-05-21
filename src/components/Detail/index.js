@@ -1,11 +1,12 @@
 import React from "react";
+import { ImageContainer } from "./style";
 
 const Detail = ({ album, artists, name }) => {
   return (
     <div className="offset-md-1 col-sm-4">
-      <div className="row col-sm-12 px-0">
+      <ImageContainer className="row col-sm-12 px-0">
         <img src={album.images[0].url} alt={name}></img>
-      </div>
+      </ImageContainer>
       <div className="row col-sm-12 px-0">
         <label htmlFor={name} className="form-label col-sm-12">
           {name}
