@@ -1,7 +1,7 @@
 import api from "./api";
 
-export async function create() {
-  const response = await api.post("/playlists");
+export async function create(data) {
+  const response = await api.post("/playlists", data);
   return response.data;
 }
 
