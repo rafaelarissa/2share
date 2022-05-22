@@ -1,17 +1,22 @@
-@import url("https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@300;400&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Proxima+Nova");
 
 * {
   box-sizing: border-box;
   transition: all ease 0.2s;
 }
 
+@font-face {
+  font-family: "circular-font";
+  src: url("../fonts/Circular/CircularStd-Book.otf") format("opentype");
+}
+
 body {
-  font-family: "Helvetica", "Arial", sans-serif;
+  font-family: "circular-font" !important;
+  src: url("../fonts/Circular/CircularStd-Book.otf") format("opentype");
   background-color: #201f1f;
   color: #ffffff;
   font-weight: 300;
 }
-
 #root {
   margin: 0 auto;
   width: 100%;

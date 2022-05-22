@@ -1,10 +1,8 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import { Container, TrackContainer } from "./style";
 
 const Listbox = (props) => {
-  const navigate = useNavigate();
-
+  console.log(props);
   return (
     <Container>
       {props.items.map((item, idx) => (
@@ -15,13 +13,7 @@ const Listbox = (props) => {
         >
           <TrackContainer>
             <div className="row col-sm-12 px-0">
-              <img
-                onClick={() =>
-                  navigate(`https://open.spotify.com/track/${item.track.id}`)
-                }
-                src={item.track.album.images[0].url}
-                alt={item.track.name}
-              />
+              <img src={item.track.album.images[0].url} alt={item.track.name} />
             </div>
             <div>
               <label

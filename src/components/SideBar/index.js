@@ -16,8 +16,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
 import { AddBox, Home, Search } from "@mui/icons-material";
+import { useNavigate } from "react-router";
 
 const drawerWidth = 240;
 
@@ -87,6 +87,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 export default function MiniDrawer() {
+  const navigate = useNavigate();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -157,8 +158,13 @@ export default function MiniDrawer() {
         </List>
         <Divider />
         <List>
-          {["Create Playlist", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding sx={{ display: "block" }}>
+          {["Create Playlist"].map((text, index) => (
+            <ListItem
+              key={text}
+              disablePadding
+              sx={{ display: "block" }}
+              onClick={() => navigate("/new-playlist")}
+            >
               <ListItemButton
                 sx={{
                   minHeight: 48,
@@ -173,7 +179,8 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  {index % 2 === 0 ? <AddBox /> : <MailIcon />}
+                  {/* {index % 2 === 0 ? <AddBox /> : <MailIcon />} */}
+                  <AddBox onClick={() => navigate("/new-playlist")} />
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>

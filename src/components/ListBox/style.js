@@ -27,10 +27,12 @@ const TrackContainer = styled.div`
 
   .track-name {
     font-weight: bold;
+    letter-spacing: 0.5px;
   }
 
   .artist-name {
     font-size: 14px;
+    color: rgba(255, 255, 255, 0.5);
   }
 
   @media (max-width: 800px) {
