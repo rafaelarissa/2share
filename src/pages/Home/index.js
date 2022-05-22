@@ -44,7 +44,7 @@ export default function Home() {
         {
           method: "GET",
           headers: {
-            Authorization: "Bearer " + token,
+            Authorization: "Bearer " + tokenResponse.data.access_token,
           },
         }
       ).then((genreResponse) => {
