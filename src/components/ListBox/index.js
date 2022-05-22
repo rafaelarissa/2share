@@ -2,7 +2,6 @@ import React from "react";
 import { Container, TrackContainer } from "./style";
 
 const Listbox = (props) => {
-  console.log(props);
   return (
     <Container>
       {props.items.map((item, idx) => (
