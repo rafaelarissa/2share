@@ -1,6 +1,7 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Button, Divider, TextField, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
+import MiniDrawer from "../../components/SideBar";
 import { Container, Input, TitleScreen } from "./style";
 
 const styles = {
@@ -10,18 +11,18 @@ const styles = {
 
   width: "100vw",
   maxWidth: "800px",
-  height: "100vh",
+  height: "80vh",
 
-  paddingTop: "55px",
   margin: "0 auto",
+  border: "2px solid #201f1f",
 
   gap: "20px",
-  bgcolor: "#121212",
 };
 
 export default function AddPlaylist() {
   return (
     <Container>
+      <MiniDrawer />
       <Box sx={styles} component="form">
         <Typography sx={styles.title} variant="h4" component="h1">
           <TitleScreen>Nova Playlist</TitleScreen>
