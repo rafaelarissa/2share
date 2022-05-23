@@ -16,7 +16,14 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import { AddBox, Home, Search } from "@mui/icons-material";
+import {
+  AddBox,
+  Home,
+  LibraryMusic,
+  MusicNote,
+  Search,
+  Star,
+} from "@mui/icons-material";
 import { useNavigate } from "react-router";
 
 const drawerWidth = 240;
@@ -133,7 +140,7 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Home", "Starred", "Search", "Drafts"].map((text, index) => (
+          {["Home", "Starred", "Search", "Playlists"].map((text, index) => (
             <ListItem key={text} disablePadding sx={{ display: "block" }}>
               <ListItemButton
                 sx={{
@@ -149,7 +156,15 @@ export default function MiniDrawer() {
                     justifyContent: "center",
                   }}
                 >
-                  {index % 2 === 0 ? <Home /> : <Search />}
+                  {index === 0 ? (
+                    <Home onClick={() => navigate("/")} />
+                  ) : index === 1 ? (
+                    <Star />
+                  ) : index === 2 ? (
+                    <Search />
+                  ) : (
+                    <LibraryMusic />
+                  )}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
               </ListItemButton>
