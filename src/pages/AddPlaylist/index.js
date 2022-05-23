@@ -1,4 +1,4 @@
-import { Button, Divider, TextField, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { useState } from "react";
@@ -53,16 +53,25 @@ export default function AddPlaylist() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (!formData?.title) {
+      alert("Title required!");
+    }
+
     const { title, icon, description } = formData;
+    console.log(title, icon, description);
 
     try {
       await createPlaylist({ title, icon, description });
       navigate("/");
+      console.log("A");
     } catch (error) {
+      console.log("B");
       if (error.response) {
-        alert(error.response.message);
+        console.log(error.response.data);
         return;
       }
+      console.log(error);
+      alert("Error, try again later!");
     }
   }
 
