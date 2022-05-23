@@ -24,8 +24,8 @@ export default function Home() {
   });
   const [trackDetail, setTrackDetail] = useState(null);
 
-  var spotify_client_id = proccess.env.REACT_APP_SPOTIFY_CLIENT_ID;
-  var spotify_client_secret = proccess.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
+  var spotify_client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
+  var spotify_client_secret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
 
   useEffect(() => {
     axios("https://accounts.spotify.com/api/token", {
