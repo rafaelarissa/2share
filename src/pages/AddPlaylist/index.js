@@ -13,14 +13,14 @@ const styles = {
     flexDirection: "column",
     alignItems: "center",
 
-    width: "100vw",
+    width: "100%",
     maxWidth: "800px",
     height: "80vh",
 
     margin: "0 auto",
     border: "2px solid #201f1f",
 
-    gap: "20px",
+    gap: "15px",
   },
   button: {
     width: "100px",

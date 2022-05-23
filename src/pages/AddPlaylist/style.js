@@ -10,11 +10,16 @@ const Container = styled.div`
 
   max-width: 800px;
   margin: 0 auto;
+  padding-left: 56px;
 `;
 
 const TitleScreen = styled.div`
   display: flex;
-  margin: 50px;
+  margin: 50px 0;
+
+  @media (max-width: 835px) {
+    margin: 20px 0;
+  }
 `;
 
 const Input = styled.input`
