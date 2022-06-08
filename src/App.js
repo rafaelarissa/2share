@@ -3,6 +3,7 @@ import React from "react";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import AddPlaylist from "./pages/AddPlaylist";
 import Home from "./pages/Home";
+import Playlists from "./pages/Playlists";
 
 export default function App() {
   const darkTheme = createTheme({
@@ -31,6 +32,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/new-playlist" element={<AddPlaylist />} />
+          <Route path="/playlists" element={<Playlists />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

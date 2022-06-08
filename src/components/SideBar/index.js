@@ -163,7 +163,7 @@ export default function MiniDrawer() {
                   ) : index === 2 ? (
                     <Search />
                   ) : (
-                    <LibraryMusic />
+                    <LibraryMusic onClick={() => navigate("/playlists")} />
                   )}
                 </ListItemIcon>
                 <ListItemText primary={text} sx={{ opacity: open ? 1 : 0 }} />
