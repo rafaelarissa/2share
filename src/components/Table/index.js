@@ -6,6 +6,7 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
+import { Avatar } from "@mui/material";
 
 export default function DenseTable({ playlists }) {
   return (
@@ -14,7 +15,8 @@ export default function DenseTable({ playlists }) {
         <TableHead>
           <TableRow>
             <TableCell>TITLE</TableCell>
-            <TableCell align="right">DESCRIPTION</TableCell>
+            <TableCell>ICON</TableCell>
+            <TableCell align="center">DESCRIPTION</TableCell>
             <TableCell align="right">CREATED AT&nbsp;</TableCell>
             {/* S */}
           </TableRow>
@@ -29,7 +31,14 @@ export default function DenseTable({ playlists }) {
                 {playlist.title}
               </TableCell>
               <TableCell align="right">
-                {playlist.description ? playlist.description : "No description"}
+                {playlist.icon ? (
+                  <Avatar src={playlist.icon} variant="round" />
+                ) : (
+                  "-"
+                )}
+              </TableCell>
+              <TableCell align="center">
+                {playlist.description ? playlist.description : "-"}
               </TableCell>
               <TableCell align="right">{playlist.createdAt}</TableCell>
             </TableRow>

@@ -58,14 +58,11 @@ export default function AddPlaylist() {
     }
 
     const { title, icon, description } = formData;
-    console.log(title, icon, description);
 
     try {
       await createPlaylist({ title, icon, description });
       navigate("/");
-      console.log("A");
     } catch (error) {
-      console.log("B");
       if (error.response) {
         console.log(error.response.data);
         return;
