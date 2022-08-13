@@ -9,3 +9,8 @@ export async function listPlaylists() {
   const response = await api.get("/playlists");
   return response.data;
 }
+
+export async function getSinglePlaylist(id) {
+  const response = await api.get(`/playlists/${id}`);
+  return response.data;
+}
