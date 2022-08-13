@@ -44,7 +44,6 @@ export default function Playlists() {
     async function loadPage() {
       const playlistsData = await listPlaylists();
       setPlaylists(playlistsData);
-      console.log(playlistsData);
     }
     loadPage();
   }, []);

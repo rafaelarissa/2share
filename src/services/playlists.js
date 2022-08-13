@@ -11,6 +11,6 @@ export async function listPlaylists() {
 }
 
 export async function getSinglePlaylist(id) {
-  const response = await api.get(`/playlists/${id}`);
+  const response = await api.get(`/playlist/${id}`);
   return response.data;
 }

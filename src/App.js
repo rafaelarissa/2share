@@ -1,9 +1,10 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import AddPlaylist from "./pages/AddPlaylist";
 import Home from "./pages/Home";
 import Playlists from "./pages/Playlists";
+import PlaylistPage from "./pages/Playlist";
 
 export default function App() {
   const darkTheme = createTheme({
@@ -33,6 +34,7 @@ export default function App() {
           <Route path="/" element={<Home />} />
           <Route path="/new-playlist" element={<AddPlaylist />} />
           <Route path="/playlists" element={<Playlists />} />
+          <Route path="/playlist/:id" element={<PlaylistPage />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>
