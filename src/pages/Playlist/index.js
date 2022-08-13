@@ -1,12 +1,4 @@
-import {
-  AccountCircle,
-  ManageSearchRounded,
-  Search,
-  SearchOff,
-  SearchOffRounded,
-  SearchOffSharp,
-  SearchRounded,
-} from "@mui/icons-material";
+import { Search } from "@mui/icons-material";
 import {
   Avatar,
   Box,
@@ -27,6 +19,7 @@ export default function PlaylistPage() {
   const { id } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [playlist, setPlaylist] = useState(null);
+  const [keyword, setKeyword] = useState("");
 
   useEffect(() => {
     async function loadPage() {
@@ -36,6 +29,10 @@ export default function PlaylistPage() {
     }
     loadPage();
   }, []);
+
+  function handleInputChange(e) {
+    setKeyword(e.target.value);
+  }
 
   return (
     <>
@@ -49,9 +46,7 @@ export default function PlaylistPage() {
             <Paper
               sx={{
                 display: "flex",
-                paddingLeft: 5,
-                paddingTop: 5,
-                paddingBottom: 3,
+                paddingLeft: "5px, 0, 3px, 5px",
                 background: "rgb(0,0,0)",
                 background:
                   "linear-gradient(0deg, rgba(0,0,0,1) 0%, rgba(69,69,69,1) 73%, rgba(129,129,129,1) 100%)",
@@ -74,6 +69,8 @@ export default function PlaylistPage() {
             </Paper>
             <TextField
               placeholder="Search for songs"
+              onChange={handleInputChange}
+              value={keyword}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -82,7 +79,7 @@ export default function PlaylistPage() {
                 ),
               }}
             />
-            <SearchSongs />
+            <SearchSongs keyword={keyword} />
           </Box>
         </>
       )}

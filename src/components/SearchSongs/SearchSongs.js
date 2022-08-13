@@ -6,15 +6,14 @@ import { useEffect } from "react";
 
 dotenv.config();
 
-function SearchSongs() {
+function SearchSongs({ keyword }) {
   const [token, setToken] = useState("");
   const [tracksDetails, setTracksDetails] = useState([]);
-  const songName = "middle";
 
   var spotify_client_id = process.env.REACT_APP_SPOTIFY_CLIENT_ID;
   var spotify_client_secret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
 
-  useEffect(() => {
+  function getApiData(keyword) {
     axios("https://accounts.spotify.com/api/token", {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
@@ -27,7 +26,7 @@ function SearchSongs() {
       setToken(tokenResponse.data.access_token);
 
       axios(
-        `https://api.spotify.com/v1/search?q=${songName}&type=track&limit=10`,
+        `https://api.spotify.com/v1/search?q=${keyword}&type=track&limit=10`,
         {
           method: "GET",
           headers: {
@@ -36,10 +35,14 @@ function SearchSongs() {
         }
       ).then((response) => {
         setTracksDetails(response.data.tracks.items);
-        console.log(response.data.tracks.items);
       });
     });
-  }, [spotify_client_id, spotify_client_secret]);
+  }
+
+  useEffect(() => {
+    if (keyword !== "") getApiData(keyword);
+    else setTracksDetails([]);
+  }, [keyword, spotify_client_id, spotify_client_secret]);
 
   return (
     <Container>
