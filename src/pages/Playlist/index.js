@@ -1,15 +1,26 @@
 import {
+  AccountCircle,
   ManageSearchRounded,
   Search,
+  SearchOff,
   SearchOffRounded,
   SearchOffSharp,
   SearchRounded,
 } from "@mui/icons-material";
-import { Avatar, Box, Container, Paper, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  Container,
+  InputAdornment,
+  Paper,
+  TextField,
+  Typography,
+} from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import Loading from "../../components/Loading/Loading";
+import SearchSongs from "../../components/SearchSongs/SearchSongs";
 import { getSinglePlaylist } from "../../services/playlists";
 
 export default function PlaylistPage() {
@@ -61,6 +72,17 @@ export default function PlaylistPage() {
                 <Typography>{playlist.description}</Typography>
               </Container>
             </Paper>
+            <TextField
+              placeholder="Search for songs"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <Search />
+                  </InputAdornment>
+                ),
+              }}
+            />
+            <SearchSongs />
           </Box>
         </>
       )}
