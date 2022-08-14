@@ -14,3 +14,8 @@ export async function getSinglePlaylist(id) {
   const response = await api.get(`/playlist/${id}`);
   return response.data;
 }
+
+export async function addSongToPlaylist(playlistId, trackAPIid) {
+  const response = await api.post(`/playlist/${playlistId}`, trackAPIid);
+  return response.data;
+}

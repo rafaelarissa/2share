@@ -1,4 +1,4 @@
-import { Avatar, Box, Container, Typography } from "@mui/material";
+import { Avatar, Box, Button, Container, Typography } from "@mui/material";
 import axios from "axios";
 import dotenv from "dotenv";
 import { useState } from "react";
@@ -6,7 +6,21 @@ import { useEffect } from "react";
 
 dotenv.config();
 
-function SearchSongs({ keyword }) {
+const styles = {
+  button: {
+    height: 30,
+    borderRadius: 50,
+    color: "#fff",
+    borderColor: "#fff",
+    fontWeight: "bold",
+    fontSize: 10,
+    "&:hover": {
+      transform: "scale(1.05)",
+    },
+  },
+};
+
+function SearchSongs({ keyword, setIsSelected }) {
   const [token, setToken] = useState("");
   const [tracksDetails, setTracksDetails] = useState([]);
 
@@ -66,9 +80,18 @@ function SearchSongs({ keyword }) {
               <Typography>{item.artists[0].name}</Typography>
             </div>
           </Box>
-          <Typography sx={{ display: "flex", justifyContent: "flex-end" }}>
-            {item.album.name}
-          </Typography>
+          <Box sx={{ display: "flex", gap: 10 }}>
+            <Typography sx={{ display: "flex", justifyContent: "flex-end" }}>
+              {item.album.name}
+            </Typography>
+            <Button
+              sx={styles.button}
+              variant="outlined"
+              onClick={() => setIsSelected(true)}
+            >
+              Add
+            </Button>
+          </Box>
         </Box>
       ))}
     </Container>
