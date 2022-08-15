@@ -37,10 +37,22 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
   },
+  button: {
+    width: "100px",
+    borderRadius: "5px",
+    color: "#121212",
+    backgroundColor: "#ffffff",
+    borderColor: "Helvetica",
+    fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: "#9e9e9e",
+      color: "#121212",
+    },
+  },
 };
 
 function SignIn() {
-  const { login } = useAuth();
+  const { auth, login } = useAuth();
   const { setMessage } = useAlert();
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -86,18 +98,23 @@ function SignIn() {
   }
 
   useEffect(() => {
-    const token = JSON.parse(localStorage.getItem("auth"));
-    if (token) navigate("/home");
+    if (auth) navigate("/home");
   }, []);
 
   return (
     <Form onSubmit={handleSubmit}>
-      Logo
+      2SHARE
       <Box sx={styles.container}>
         <Typography sx={styles.title} variant="h4" component="h1">
           Login
         </Typography>
-        <Button variant="contained" color="secondary">
+        <Button variant="contained" sx={{
+          color: "#121212",backgroundColor: "#ffffff",
+          borderColor: "Helvetica",
+          "&:hover": {
+            backgroundColor: "#9e9e9e",
+            color: "#121212",
+          },}}>
           Sing in with Spotify
         </Button>
         <Box sx={styles.dividerContainer}>
@@ -136,7 +153,7 @@ function SignIn() {
           <Link component={RouterLink} to="/">
             <Typography>New here?</Typography>
           </Link>
-          <Button variant="contained" type="submit">
+          <Button variant="contained" type="submit" sx={styles.button}>
             Sign in
           </Button>
         </Box>

@@ -1,9 +1,11 @@
 import { Button, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import MiniDrawer from "../../components/SideBar";
+import useAlert from "../../hooks/useAlert";
+import useAuth from "../../hooks/useAuth";
 import { createPlaylist } from "../../services/playlists";
 import { Container, Input, TitleScreen } from "./style";
 
@@ -40,11 +42,27 @@ const styles = {
 
 export default function AddPlaylist() {
   const navigate = useNavigate();
+  const { auth } = useAuth();
+  const { setMessage } = useAlert();
   const [formData, setFormData] = useState({
     title: "",
     icon: "",
     description: "",
   });
+
+  useEffect(() => {
+    async function loadPage() {
+      if (!auth) {
+        setMessage({
+          type: "error",
+          text: "You have to be logged in!",
+        });
+        navigate("/login");
+        return;
+      }
+    }
+    loadPage();
+  }, []);
 
   function handleInputChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });

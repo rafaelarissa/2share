@@ -1,8 +1,11 @@
 import { Api } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import MiniDrawer from "../../components/SideBar";
 import DenseTable from "../../components/Table";
+import useAlert from "../../hooks/useAlert";
+import useAuth from "../../hooks/useAuth";
 import { listPlaylists } from "../../services/playlists";
 import { Container, TitleScreen } from "../AddPlaylist/style";
 
@@ -39,9 +42,21 @@ const styles = {
 
 export default function Playlists() {
   const [playlists, setPlaylists] = useState([]);
+  const { setMessage } = useAlert();
+  const {auth} = useAuth()
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadPage() {
+      if (!auth) {
+        setMessage({
+          type: "error",
+          text: "You have to be logged in!",
+        });
+        navigate("/login");
+        return;
+      }
+
       const playlistsData = await listPlaylists();
       setPlaylists(playlistsData);
     }

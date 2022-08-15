@@ -1,11 +1,12 @@
 import { Box, Button, Divider, Link, TextField, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link as RouterLink,useNavigate } from "react-router-dom";
 import Form from "../../components/Form";
 import PasswordInput from "../../components/PasswordInput";
 import { signUp } from "../../services/users";
 import { ThreeDots } from "react-loader-spinner";
 import useAlert from "../../hooks/useAlert";
+import useAuth from "../../hooks/useAuth";
 
 const styles = {
   container: {
@@ -29,9 +30,22 @@ const styles = {
     justifyContent: "space-between",
     alignItems: "center",
   },
+  button: {
+    width: "100px",
+    borderRadius: "5px",
+    color: "#121212",
+    backgroundColor: "#ffffff",
+    borderColor: "Helvetica",
+    fontWeight: "bold",
+    "&:hover": {
+      backgroundColor: "#9e9e9e",
+      color: "#121212",
+    },
+  },
 };
 
 function SignUp(){
+  const {auth} = useAuth()
   const { setMessage } = useAlert();
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
@@ -85,14 +99,24 @@ function SignUp(){
     }
   }
 
+  useEffect(() => {
+    if (auth) navigate("/home");
+  }, []);
+
   return (
     <Form onSubmit={handleSubmit}>
-      Logo
+      2share
       <Box sx={styles.container}>
         <Typography sx={styles.title} variant="h4" component="h1">
           Sign up
         </Typography>
-        <Button variant="contained" >
+        <Button variant="contained" sx={{
+          color: "#121212",backgroundColor: "#ffffff",
+          borderColor: "Helvetica",
+          "&:hover": {
+            backgroundColor: "#9e9e9e",
+            color: "#121212",
+          },}}>
           Sing in with Spotify
         </Button>
         <Box sx={styles.dividerContainer}>
@@ -138,7 +162,7 @@ function SignUp(){
           <Link component={RouterLink} to="/login">
             <Typography>Alreary have an account</Typography>
           </Link>
-          <Button variant="contained" type="submit" disabled={isLoading}>
+          <Button variant="contained" type="submit" disabled={isLoading} sx={styles.button}>
             {isLoading ? (<ThreeDots type="ThreeDots"
               color="#FFFFFF"
               height={50}

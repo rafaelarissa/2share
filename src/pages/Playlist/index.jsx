@@ -10,14 +10,19 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import AddSongsToPlaylist from "../../components/AddSongsToPlaylist";
 import Loading from "../../components/Loading/Loading";
 import SearchSongs from "../../components/SearchSongs/SearchSongs";
+import useAlert from "../../hooks/useAlert";
+import useAuth from "../../hooks/useAuth";
 import { getSinglePlaylist } from "../../services/playlists";
 
 export default function PlaylistPage() {
+  const { auth } = useAuth();
   const { id } = useParams();
+  const { setMessage } = useAlert();
+  const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
   const [playlist, setPlaylist] = useState(null);
   const [keyword, setKeyword] = useState("");
@@ -25,6 +30,14 @@ export default function PlaylistPage() {
 
   useEffect(() => {
     async function loadPage() {
+      if (!auth) {
+        setMessage({
+          type: "error",
+          text: "You have to be logged in!",
+        });
+        navigate("/login");
+        return;
+      }
       const playlistData = await getSinglePlaylist(id);
       setPlaylist(playlistData);
       setIsLoading(false);
