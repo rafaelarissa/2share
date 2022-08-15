@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import SignIn from "./pages/SignIn";
 import Alert from "./components/Alert";
 import { AlertProvider } from "./contexts/AlertContext";
+import { AuthProvider } from "./contexts/AuthContext";
 
 export default function App() {
   const darkTheme = createTheme({
@@ -34,17 +35,19 @@ export default function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <AlertProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<SignUp />} />
-            <Route path="/login" element={<SignIn />} />
-            <Route path="/home" element={<Home />} />
-            <Route path="/new-playlist" element={<AddPlaylist />} />
-            <Route path="/playlists" element={<Playlists />} />
-            <Route path="/playlist/:id" element={<PlaylistPage />} />
-          </Routes>
-        </BrowserRouter>
-        <Alert />
+        <AuthProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<SignUp />} />
+              <Route path="/login" element={<SignIn />} />
+              <Route path="/home" element={<Home />} />
+              <Route path="/new-playlist" element={<AddPlaylist />} />
+              <Route path="/playlists" element={<Playlists />} />
+              <Route path="/playlist/:id" element={<PlaylistPage />} />
+            </Routes>
+          </BrowserRouter>
+          <Alert />
+        </AuthProvider>
       </AlertProvider>
     </ThemeProvider>
   );

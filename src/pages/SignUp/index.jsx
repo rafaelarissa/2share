@@ -93,7 +93,7 @@ function SignUp(){
           Sign up
         </Typography>
         <Button variant="contained" >
-          Entrar com Spotify
+          Sing in with Spotify
         </Button>
         <Box sx={styles.dividerContainer}>
           <Divider sx={{ flex: "1" }} />
