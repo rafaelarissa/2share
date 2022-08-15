@@ -5,6 +5,7 @@ import Form from "../../components/Form";
 import PasswordInput from "../../components/PasswordInput";
 import { signUp } from "../../services/users";
 import { ThreeDots } from "react-loader-spinner";
+import useAlert from "../../hooks/useAlert";
 
 const styles = {
   container: {
@@ -31,6 +32,7 @@ const styles = {
 };
 
 function SignUp(){
+  const { setMessage } = useAlert();
   const navigate = useNavigate()
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -50,27 +52,36 @@ function SignUp(){
 
     Object.keys(formData).forEach((item) => {
       if (!formData[item]) {
-        alert("All fields must be filled");
+        setMessage({ type: "error", text: "All fields are required!" });
+        return
       }
-      return
     })
     
     const {email, username, password, passwordConfirmation} = formData;
     
-    if (password !== passwordConfirmation)
-      return alert("Passwords must match! Refresh and try again");
+    if (password !== passwordConfirmation){
+      setMessage({type: "error", text: "Passwords must match! Refresh and try again"});
+      return 
+    }
    
     try {
       await signUp({ email, username, password });
+      setMessage({ type: "success", text: "You're signed up!" });
       setIsLoading(false);
-      navigate("/");
+      navigate("/login");
     } catch (error) {
-      if (error.response.status === 409) {
-        alert("Email/username already in use")
+      if (error.response) {
+        setMessage({
+          type: "error",
+          text: error.response.data,
+        });
         setIsLoading(false);
         return;
       }
-      console.log(error)
+      setMessage({
+        type: "error",
+        text: "Error, try again in a few seconds!",
+      });
     }
   }
 
@@ -124,7 +135,7 @@ function SignUp(){
           value={formData.passwordConfirmation}
         />
         <Box sx={styles.actionsContainer}>
-          <Link component={RouterLink} to="/">
+          <Link component={RouterLink} to="/login">
             <Typography>Alreary have an account</Typography>
           </Link>
           <Button variant="contained" type="submit" disabled={isLoading}>
