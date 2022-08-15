@@ -123,7 +123,7 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div" sx={{ fontSize: 30 }}>
             2share
           </Typography>
         </Toolbar>
