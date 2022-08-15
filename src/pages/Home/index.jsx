@@ -1,4 +1,4 @@
-import { Container } from "@mui/material";
+import { Box, Container } from "@mui/material";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import dotenv from "dotenv";
@@ -109,7 +109,7 @@ export default function Home() {
  
   return (
     <>
-    {isLoading ? <TailSpin />:   
+    {isLoading ? <Box sx={{width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}}><TailSpin /></Box>:   
     <Container>
       <MiniDrawer />
       <div className="row">

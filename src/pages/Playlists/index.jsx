@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
 import { useNavigate } from "react-router-dom";
@@ -42,7 +42,7 @@ const styles = {
 
 export default function Playlists() {
   const [playlists, setPlaylists] = useState([]);
-  const [isLoading, setIsLoading] = useState(true)
+  const [isLoading, setIsLoading] = useState(false)
   const { setMessage } = useAlert();
   const {auth} = useAuth()
   const navigate = useNavigate();
@@ -68,7 +68,7 @@ export default function Playlists() {
 
   return (
     <>
-    {isLoading ? <TailSpin />:  
+    {isLoading ? <Box sx={{width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}}><TailSpin /></Box>:
     <Container>
       <MiniDrawer />
       <Typography sx={styles.title} variant="h3" component="h1">

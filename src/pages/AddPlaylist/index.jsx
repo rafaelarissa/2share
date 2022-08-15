@@ -100,7 +100,7 @@ export default function AddPlaylist() {
 
   return (
     <>
-    {isLoading ? <TailSpin />:
+    {isLoading ? <Box sx={{width: "100vw", height: "100vh", display: "flex", justifyContent: "center", alignItems: "center"}}><TailSpin /></Box>:
     <Container>
       <MiniDrawer />
       <Box sx={styles.box} component="form" onSubmit={handleSubmit}>
