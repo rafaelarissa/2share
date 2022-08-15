@@ -1,5 +1,6 @@
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
+import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
 import { useNavigate } from "react-router-dom";
 import MiniDrawer from "../../components/SideBar";
 import DenseTable from "../../components/Table";
@@ -41,6 +42,7 @@ const styles = {
 
 export default function Playlists() {
   const [playlists, setPlaylists] = useState([]);
+  const [isLoading, setIsLoading] = useState(true)
   const { setMessage } = useAlert();
   const {auth} = useAuth()
   const navigate = useNavigate();
@@ -52,17 +54,21 @@ export default function Playlists() {
           type: "error",
           text: "You have to be logged in!",
         });
+        setIsLoading(false)
         navigate("/login");
         return;
       }
 
       const playlistsData = await listPlaylists(auth);
       setPlaylists(playlistsData);
+      setIsLoading(false)
     }
     loadPage();
   }, []);
 
   return (
+    <>
+    {isLoading ? <TailSpin />:  
     <Container>
       <MiniDrawer />
       <Typography sx={styles.title} variant="h3" component="h1">
@@ -74,5 +80,7 @@ export default function Playlists() {
         "There're no playlists yet"
       )}
     </Container>
+    }
+    </>
   );
 }

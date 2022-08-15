@@ -10,9 +10,9 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { useEffect } from "react";
+import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
 import { useNavigate, useParams } from "react-router-dom";
 import AddSongsToPlaylist from "../../components/AddSongsToPlaylist";
-import Loading from "../../components/Loading/Loading";
 import SearchSongs from "../../components/SearchSongs/SearchSongs";
 import useAlert from "../../hooks/useAlert";
 import useAuth from "../../hooks/useAuth";
@@ -53,7 +53,7 @@ export default function PlaylistPage() {
     <>
       {isLoading ? (
         <>
-          <Loading />
+          <TailSpin />
         </>
       ) : (
         <>

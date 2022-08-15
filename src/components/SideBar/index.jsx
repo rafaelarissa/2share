@@ -157,7 +157,7 @@ export default function MiniDrawer() {
                   }}
                 >
                   {index === 0 ? (
-                    <Home onClick={() => navigate("/")} />
+                    <Home onClick={() => navigate("/home")} />
                   ) : index === 1 ? (
                     <Star />
                   ) : index === 2 ? (

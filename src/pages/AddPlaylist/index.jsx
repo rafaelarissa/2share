@@ -2,6 +2,7 @@ import { Button, Typography } from "@mui/material";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import { useEffect, useState } from "react";
+import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
 import { useNavigate } from "react-router";
 import MiniDrawer from "../../components/SideBar";
 import useAlert from "../../hooks/useAlert";
@@ -44,6 +45,7 @@ export default function AddPlaylist() {
   const navigate = useNavigate();
   const { auth } = useAuth();
   const { setMessage } = useAlert();
+  const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
     icon: "",
@@ -51,18 +53,19 @@ export default function AddPlaylist() {
   });
 
   useEffect(() => {
-    async function loadPage() {
+    function loadPage() {
       if (!auth) {
         setMessage({
           type: "error",
           text: "You have to be logged in!",
         });
+        setIsLoading(false)
         navigate("/login");
         return;
       }
     }
     loadPage();
-  }, []);
+  }, [auth]);
 
   function handleInputChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -70,15 +73,18 @@ export default function AddPlaylist() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setIsLoading(true)
 
     if (!formData?.title) {
-      alert("Title required!");
+      setMessage({type: "error", text: "Title required!"})
     }
 
     const { title, icon, description } = formData;
 
     try {
       await createPlaylist(auth,{ title, icon, description });
+      setMessage({type: "success", text: "Playlist created!"})
+      setIsLoading(false)
       navigate("/");
     } catch (error) {
       if (error.response) {
@@ -87,10 +93,14 @@ export default function AddPlaylist() {
       }
       console.log(error);
       alert("Error, try again later!");
+
+      setIsLoading(false)
     }
   }
 
   return (
+    <>
+    {isLoading ? <TailSpin />:
     <Container>
       <MiniDrawer />
       <Box sx={styles.box} component="form" onSubmit={handleSubmit}>
@@ -122,5 +132,6 @@ export default function AddPlaylist() {
         </Button>
       </Box>
     </Container>
+}</>
   );
 }

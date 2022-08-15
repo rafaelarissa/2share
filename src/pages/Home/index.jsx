@@ -6,6 +6,7 @@ import Listbox from "../../components/ListBox";
 import MiniDrawer from "../../components/SideBar";
 import useAuth from "../../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import TailSpin from "react-loading-icons/dist/esm/components/tail-spin";
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ export default function Home() {
   const navigate = useNavigate();
   const { auth } = useAuth();
   const [token, setToken] = useState("");
+  const [isLoading, setIsLoading] = useState(true)
 
   const [genres, setGenres] = useState({
     selectedGenre: "",
@@ -31,7 +33,7 @@ export default function Home() {
   var spotify_client_secret = process.env.REACT_APP_SPOTIFY_CLIENT_SECRET;
 
   useEffect(() => {
-    async function loadPage() {
+    function loadPage() {
       if (!auth) navigate("/login");
 
       axios("https://accounts.spotify.com/api/token", {
@@ -92,22 +94,31 @@ export default function Home() {
                     selectedTrack: tracks.selectedTrack,
                     listOfTracksFromAPI: listTracks,
                   });
+                  setIsLoading(false)
                 });
               });
             });
           });
         });
+        
       });
     }
     loadPage();
   }, [auth, genres.selectedGenre, spotify_client_id, spotify_client_secret]);
 
+ 
   return (
+    <>
+    {isLoading ? <TailSpin />:   
     <Container>
       <MiniDrawer />
       <div className="row">
         <Listbox items={tracks.listOfTracksFromAPI} />
       </div>
     </Container>
+    }
+    </>
   );
+  
+  
 }
