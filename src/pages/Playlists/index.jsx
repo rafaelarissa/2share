@@ -1,4 +1,3 @@
-import { Api } from "@mui/icons-material";
 import { Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -57,7 +56,7 @@ export default function Playlists() {
         return;
       }
 
-      const playlistsData = await listPlaylists();
+      const playlistsData = await listPlaylists(auth);
       setPlaylists(playlistsData);
     }
     loadPage();

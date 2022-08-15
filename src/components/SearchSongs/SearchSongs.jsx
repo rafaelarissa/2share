@@ -16,6 +16,7 @@ const styles = {
     fontSize: 10,
     "&:hover": {
       transform: "scale(1.05)",
+      borderColor: "#fff"
     },
   },
 };
@@ -59,7 +60,7 @@ function SearchSongs({ keyword, setIsSelected }) {
   }, [keyword, spotify_client_id, spotify_client_secret]);
 
   return (
-    <Container>
+    <Box sx={{width: "100%", paddingRight: 6}}>
       {tracksDetails.map((item, idx) => (
         <Box
           key={idx}
@@ -80,8 +81,8 @@ function SearchSongs({ keyword, setIsSelected }) {
               <Typography>{item.artists[0].name}</Typography>
             </div>
           </Box>
-          <Box sx={{ display: "flex", gap: 10 }}>
-            <Typography sx={{ display: "flex", justifyContent: "flex-end" }}>
+          <Box sx={{ display: "flex", gap: 50 }}>
+            <Typography>
               {item.album.name}
             </Typography>
             <Button
@@ -94,7 +95,7 @@ function SearchSongs({ keyword, setIsSelected }) {
           </Box>
         </Box>
       ))}
-    </Container>
+    </Box>
   );
 }
 

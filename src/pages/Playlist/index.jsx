@@ -38,8 +38,8 @@ export default function PlaylistPage() {
         navigate("/login");
         return;
       }
-      const playlistData = await getSinglePlaylist(id);
-      setPlaylist(playlistData);
+      const playlistData = await getSinglePlaylist(auth,id);
+      setPlaylist(playlistData[0]);
       setIsLoading(false);
     }
     loadPage();
@@ -57,7 +57,7 @@ export default function PlaylistPage() {
         </>
       ) : (
         <>
-          <Box>
+          <Box sx={{display: "flex", flexDirection: "column", gap: 3}}>
             <Paper
               sx={{
                 display: "flex",
@@ -78,26 +78,31 @@ export default function PlaylistPage() {
                   boxShadow: "5px 5px 5px rgba(0,0,0,0.5)",
                 }}
               />
-              <Container>
+              <Container maxWidth="xl">
                 <Typography variant="overline">PLAYLIST</Typography>
                 <Typography variant="h1">{playlist.title}</Typography>
                 <Typography>{playlist.description}</Typography>
               </Container>
             </Paper>
-            {isSelected ? <AddSongsToPlaylist /> : <></>}
-            <TextField
-              placeholder="Search for songs"
-              onChange={handleInputChange}
-              value={keyword}
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <Search />
-                  </InputAdornment>
-                ),
-              }}
-            />
-            <SearchSongs keyword={keyword} setIsSelected={setIsSelected} />
+              {isSelected ? <AddSongsToPlaylist /> : <></>}
+            <Box sx={{display: "flex", flexDirection: "column", paddingLeft: 4, gap: 2}}>
+              <Typography variant="h5">Add new songs to your playlist</Typography>
+              <TextField
+                placeholder="Search for songs"
+                onChange={handleInputChange}
+                value={keyword}
+                size="small"
+                sx={{width: 333, backgroundColor: "#424242", borderColor: "#424242"}}
+                InputProps={{
+                  startAdornment: (
+                    <InputAdornment position="start">
+                      <Search />
+                    </InputAdornment>
+                  ),
+                }}
+              />
+              <SearchSongs keyword={keyword} setIsSelected={setIsSelected}/>
+            </Box>
           </Box>
         </>
       )}

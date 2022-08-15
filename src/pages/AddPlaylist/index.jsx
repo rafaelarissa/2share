@@ -78,7 +78,7 @@ export default function AddPlaylist() {
     const { title, icon, description } = formData;
 
     try {
-      await createPlaylist({ title, icon, description });
+      await createPlaylist(auth,{ title, icon, description });
       navigate("/");
     } catch (error) {
       if (error.response) {
